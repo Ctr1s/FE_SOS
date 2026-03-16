@@ -1,6 +1,5 @@
 <template>
   <div class="auth-container user-theme">
-    <!-- Background glowing orbs -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
@@ -13,10 +12,10 @@
 
       <form @submit.prevent="handleLogin" class="auth-form">
         <div class="input-group">
-          <label for="email">GMAIL HOẶC SỐ ĐIỆN THOẠI</label>
+          <label for="email">GMAIL</label>
           <div class="input-wrapper">
             <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            <input type="text" id="email" placeholder="Nhập tài khoản của bạn" required>
+            <input type="text" id="email" placeholder="Nhập gmail của bạn" required>
           </div>
         </div>
 
@@ -60,10 +59,34 @@
   </div>
 </template>
 
-<script setup>
-const handleLogin = () => {
-  // Login logic here
-};
+<script>
+
+import axios from 'axios';
+export default {
+    data() {
+        return {
+            thong_tin_dang_nhap: {}
+        }
+    },
+    methods: {
+        dangNhap() {
+            axios.post('http://127.0.0.1:8000/api/client/dang-nhap', this.thong_tin_dang_nhap)
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                        console.log(res.data.data);
+
+                        localStorage.setItem('key_client', res.data.token)
+
+                        this.$router.push('/')
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                });
+        }
+    },
+}
+
 </script>
 
 <style scoped>
