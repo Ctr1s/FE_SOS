@@ -7,9 +7,11 @@
       </div>
     </div>
     <div class="card-body">
-      <div class="border rounded-4 p-3 mb-3 bg-light-subtle">
-        <div class="small text-muted mb-2">Bản đồ real-time</div>
-        <div class="tracking-map-placeholder rounded-3"></div>
+      <div class="border rounded-4 overflow-hidden mb-3 bg-light-subtle">
+        <div class="small text-muted p-2 px-3 bg-white border-bottom">Bản đồ (Mapbox) — nối WebSocket sau</div>
+        <div class="tracking-map-wrap">
+          <MapboxMap :zoom="12" />
+        </div>
       </div>
       <div class="small text-muted">
         Gợi ý tính năng:
@@ -24,21 +26,17 @@
 </template>
 
 <script>
+import MapboxMap from "../../common/MapboxMap.vue";
+
 export default {
   name: "AdminTracking",
+  components: { MapboxMap },
 };
 </script>
 
 <style scoped>
-.tracking-map-placeholder {
-  height: 260px;
-  background: repeating-linear-gradient(
-      45deg,
-      rgba(148, 163, 184, 0.25),
-      rgba(148, 163, 184, 0.25) 10px,
-      rgba(148, 163, 184, 0.16) 10px,
-      rgba(148, 163, 184, 0.16) 20px
-    );
+.tracking-map-wrap {
+  height: 400px;
 }
 </style>
 

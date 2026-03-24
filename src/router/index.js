@@ -1,26 +1,38 @@
-import { createRouter, createWebHistory } from "vue-router"; // cài vue-router: npm install vue-router@next --save
+import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
-
     // client
     {
-        path : '/client/register',
-        component: ()=>import('../components/Client/DangKy/index.vue')
-        
+        path: "/client/register",
+        component: () => import("../components/Client/DangKy/index.vue"),
     },
     {
-        path : '/client/login',
-        component: ()=>import('../components/Client/DangNhap/index.vue')
-        
+        path: "/client/login",
+        component: () => import("../components/Client/DangNhap/index.vue"),
     },
     {
-        path : '/',
-        component: ()=>import('../components/Client/TrangChu/index.vue'),
+        path: "/",
+        component: () => import("../components/Client/TrangChu/index.vue"),
+        meta: { layout: "client" },
+    },
+     {
+        path: "/client/requests",
+        component: () => import("../components/Client/Request/index.vue"),
         meta: { layout: "client" },
     },
     {
-        path : '/client/history',
-        component: ()=>import('../components/Client/LichSuYeuCau/index.vue'),
+        path: "/client/profile",
+        component: () => import("../components/Client/Profile/index.vue"),
+        meta: { layout: "client" },
+    },
+    {
+        path: "/client/change-password",
+        component: () => import("../components/Client/DoiPassword/index.vue"),
+        meta: { layout: "client" },
+    },
+    {
+        path: "/client/history",
+        component: () => import("../components/Client/LichSuYeuCau/index.vue"),
         meta: { layout: "client" },
     },
     {
@@ -34,7 +46,7 @@ const routes = [
         meta: { layout: "client" },
     },
 
-    // admin
+    // admin 
     {
         path: "/admin/login",
         component: () => import("../components/Admin/DangNhap/index.vue"),
@@ -85,27 +97,42 @@ const routes = [
         meta: { layout: "admin" },
     },
     {
-        path: "/admin/accounts",
-        component: () => import("../components/Admin/Accounts/index.vue"),
+        path: "/admin/accounts/admin",
+        component: () => import("../components/Admin/Accounts/Admin/index.vue"),
+        meta: { layout: "admin" },
+    },
+    {
+        path: "/admin/accounts/user",
+        component: () => import("../components/Admin/Accounts/User/index.vue"),
+        meta: { layout: "admin" },
+    },
+    {
+        path: "/admin/accounts/rescuer",
+        component: () => import("../components/Admin/Accounts/Rescuer/index.vue"),
         meta: { layout: "admin" },
     },
 
-    // rescuser
+    // 
+    { path: "/dashboard", redirect: "/admin" },
+    { path: "/inventory", redirect: "/admin/resources" },
+    { path: "/add-product", redirect: "/admin/resources" },
+    { path: "/reports", redirect: "/admin/reports" },
+
+    // rescuer
     {
-        path : '/rescuser/login',
-        component: ()=>import('../components/Rescuer/DangNhap/index.vue')
+        path: "/rescuser/login",
+        component: () => import("../components/Rescuer/DangNhap/index.vue"),
     },
     {
         path: "/rescuer/home",
         component: () => import("../components/Rescuer/TrangChu/index.vue"),
         meta: { layout: "rescuer" },
     },
-    
-]
+];
 
 const router = createRouter({
     history: createWebHistory(),
-    routes: routes
-})
+    routes: routes,
+});
 
-export default router
+export default router;

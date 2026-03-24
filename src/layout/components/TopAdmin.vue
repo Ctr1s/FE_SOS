@@ -26,7 +26,7 @@
         <button class="btn btn-sm btn-outline-light d-flex align-items-center rounded-pill px-2" type="button"
           data-bs-toggle="dropdown">
           <span class="avatar-initial me-2">AD</span>
-          <span class="small text-white d-none d-sm-inline">Admin</span>
+          <span class="small text-white d-none d-sm-inline">{{ adminName }}</span>
           <i class="fa-solid fa-chevron-down ms-2 small text-white-50 d-none d-sm-inline"></i>
         </button>
         <ul class="dropdown-menu dropdown-menu-end shadow-sm">
@@ -35,7 +35,7 @@
             <hr class="dropdown-divider my-1" />
           </li>
           <li>
-            <button class="dropdown-item text-danger small" type="button">
+            <button class="dropdown-item text-danger small" type="button" @click="logout">
               <i class="fa-solid fa-right-from-bracket me-2"></i>Đăng xuất
             </button>
           </li>
@@ -48,6 +48,25 @@
 <script>
 export default {
   name: "TopAdmin",
+  computed: {
+    adminName() {
+      try {
+        const raw = localStorage.getItem("admin_user");
+        if (!raw) return "Admin";
+        const u = JSON.parse(raw);
+        return u.ho_ten || u.email || "Admin";
+      } catch {
+        return "Admin";
+      }
+    },
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem("admin_token");
+      localStorage.removeItem("admin_user");
+      this.$router.push("/admin/login");
+    },
+  },
 };
 </script>
 

@@ -7,98 +7,90 @@
     <div class="auth-card">
       <div class="brand">
         <h1 class="logo">now<span>SOS</span></h1>
-        <p class="subtitle">Tao tai khoan moi de tiep tuc</p>
+        <p class="subtitle">Create your account</p>
       </div>
 
-      <!-- FIX: Dung @submit.prevent="dangKy" nhat quan -->
-      <form @submit.prevent="dangKy" class="auth-form">
+      <form class="auth-form">
 
-        <div class="input-group">
-          <label for="fullname">HO VA TEN</label>
-          <div class="input-wrapper">
-            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            <input v-model="nguoi_dung.ho_ten" type="text" id="fullname" placeholder="Nhap ho va ten cua ban" required>
-          </div>
-        </div>
+  <div class="input-group">
+    <label for="fullname">HO VA TEN</label>
+    <div class="input-wrapper">
+      <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+      <input v-model="nguoi_dung.ho_ten" type="text" id="fullname" placeholder="Nhap ho va ten cua ban" required>
+    </div>
+  </div>
 
-        <div class="input-group">
-          <label for="phone">CCCD</label>
-          <div class="input-wrapper">
-            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect>
-              <circle cx="8" cy="12" r="2"></circle>
-              <line x1="12" y1="10" x2="18" y2="10"></line>
-              <line x1="12" y1="14" x2="18" y2="14"></line>
-            </svg>
-            <input v-model="nguoi_dung.cccd" type="text" id="phone" placeholder="Nhap so cccd" required>
-          </div>
-        </div>
-        <div class="input-group">
-          <label for="phone">SO DIEN THOAI</label>
-          <div class="input-wrapper">
-            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-              <line x1="12" y1="18" x2="12.01" y2="18"></line>
-            </svg>
-            <input v-model="nguoi_dung.so_dien_thoai" type="text" id="phone" placeholder="Nhap so dien thoai" required>
-          </div>
-        </div>
+  <div class="input-group">
+    <label for="phone">SO DIEN THOAI</label>
+    <div class="input-wrapper">
+      <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+      </svg>
+      <input v-model="nguoi_dung.so_dien_thoai" type="text" id="phone" placeholder="Nhap so dien thoai" required>
+    </div>
+  </div>
 
-        <div class="input-group">
-          <label for="email">EMAIL</label>
-          <div class="input-wrapper">
-            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            <input v-model="nguoi_dung.email" type="email" id="email" placeholder="Nhap email" required>
-          </div>
-        </div>
+  <div class="input-group">
+    <label for="email">EMAIL</label>
+    <div class="input-wrapper">
+      <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+      <input v-model="nguoi_dung.email" type="email" id="email" placeholder="Nhap email" required>
+    </div>
+  </div>
 
-        <div class="input-group">
-          <label for="password">MAT KHAU</label>
-          <div class="input-wrapper">
-            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            </svg>
-            <input v-model="nguoi_dung.mat_khau" :type="showPassword ? 'text' : 'password'" id="password"
-              placeholder="Tao mat khau" required>
-            <span class="eye-icon" @click="showPassword = !showPassword">
-              <i :class="showPassword ? 'bx bx-show' : 'bx bx-hide'"></i>
-            </span>
-          </div>
-        </div>
+  <div class="input-group">
+    <label for="password">MAT KHAU</label>
+    <div class="input-wrapper">
+      <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      <input v-model="nguoi_dung.mat_khau" :type="showPassword ? 'text' : 'password'" id="password"
+        placeholder="Tao mat khau" required>
+      <span class="eye-icon" @click="showPassword = !showPassword">
+        <i :class="showPassword ? 'bx bx-show' : 'bx bx-hide'"></i>
+      </span>
+    </div>
+  </div>
 
-        <div class="input-group">
-          <label for="repassword">NHAP LAI MAT KHAU</label>
-          <div class="input-wrapper">
-            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            </svg>
-            <input v-model="nguoi_dung.repassword" :type="showRePassword ? 'text' : 'password'" id="repassword"
-              placeholder="Nhap lai mat khau" required>
-            <span class="eye-icon" @click="showRePassword = !showRePassword">
-              <i :class="showRePassword ? 'bx bx-show' : 'bx bx-hide'"></i>
-            </span>
-          </div>
-        </div>
+  <div class="input-group">
+    <label for="repassword">NHAP LAI MAT KHAU</label>
+    <div class="input-wrapper">
+      <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      <input v-model="nguoi_dung.repassword" :type="showRePassword ? 'text' : 'password'" id="repassword"
+        placeholder="Nhap lai mat khau" required>
+      <span class="eye-icon" @click="showRePassword = !showRePassword">
+        <i :class="showRePassword ? 'bx bx-show' : 'bx bx-hide'"></i>
+      </span>
+    </div>
+  </div>
 
+  <!-- 🔥 BUTTON CLICK -->
+  <button 
+    type="button" 
+    class="btn-primary" 
+    :disabled="isLoading"
+    @click="dangKy"
+  >
+    {{ isLoading ? 'Dang xu ly...' : 'Dang Ky' }}
+  </button>
 
-        <button type="submit" class="btn-primary" :disabled="isLoading">
-          {{ isLoading ? 'Dang xu ly...' : 'Dang Ky' }}
-        </button>
-      </form>
+</form>
 
       <div class="divider">
         <span>Dang ky qua mang xa hoi</span>
@@ -133,7 +125,7 @@
       </div>
 
       <p class="switch-page">
-        Da co tai khoan? <router-link to="/user/login">Dang nhap</router-link>
+        Đã có tài khoản? <router-link to="/client/login">Đăng nhập</router-link>
       </p>
     </div>
   </div>
@@ -141,65 +133,69 @@
 
 
 <script>
-import axios from 'axios'
+import { authAPI } from "../../../services/api.js";
 
 export default {
   data() {
     return {
       nguoi_dung: {
-        ho_ten: '',
-        so_dien_thoai: '',
-        email: '',
-        mat_khau: '',
-        repassword: '',
+        ho_ten: "",
+        so_dien_thoai: "",
+        email: "",
+        mat_khau: "",
+        repassword: "",
       },
       showPassword: false,
       showRePassword: false,
       isLoading: false,
-    }
+    };
   },
 
   methods: {
     async dangKy() {
-      // Kiem tra mat khau khop truoc khi gui len server
       if (this.nguoi_dung.mat_khau !== this.nguoi_dung.repassword) {
-        this.$toast.error('Mat khau nhap lai khong khop!')
-        return
+        this.$toast.error("Mật khẩu nhập lại không khớp!");
+        return;
       }
 
-      this.isLoading = true
+      this.isLoading = true;
 
       try {
-        const res = await axios.post(
-          'http://127.0.0.1:8000/api/nguoi-dung/register',
-          {
-            ho_ten: this.nguoi_dung.ho_ten,
-            so_dien_thoai: this.nguoi_dung.so_dien_thoai,
-            email: this.nguoi_dung.email,
-            mat_khau: this.nguoi_dung.mat_khau,
-          }
-        )
+        const res = await authAPI.registerUser({
+          ho_ten: this.nguoi_dung.ho_ten,
+          so_dien_thoai: this.nguoi_dung.so_dien_thoai,
+          email: this.nguoi_dung.email,
+          mat_khau: this.nguoi_dung.mat_khau,
+        });
 
-        this.$toast.success(res.data.message)
-        this.$router.push('/user/login')
-
+        const body = res.data;
+        this.$toast.success(body.message || "Đăng ký thành công");
+        if (body.token) {
+          localStorage.removeItem("admin_token");
+          localStorage.removeItem("admin_user");
+          localStorage.setItem("token", body.token);
+          localStorage.setItem("user", JSON.stringify(body.data || {}));
+          this.$router.push("/");
+        } else {
+          this.$router.push("/client/login");
+        }
       } catch (err) {
-        // Laravel tra ve loi validate o err.response.data.errors
-        const errors = err.response?.data?.errors
+        const errors = err.response?.data?.errors;
         if (errors) {
           Object.values(errors).forEach((messages) => {
-            this.$toast.error(messages[0])
-          })
+            this.$toast.error(messages[0]);
+          });
         } else {
-          this.$toast.error('Co loi xay ra, vui long thu lai!')
+          this.$toast.error(
+            err.response?.data?.message || "Có lỗi xảy ra, vui lòng thử lại!"
+          );
         }
-
       } finally {
-        this.isLoading = false
+        this.isLoading = false;
       }
     },
   },
-}
+};
 </script>
 
 

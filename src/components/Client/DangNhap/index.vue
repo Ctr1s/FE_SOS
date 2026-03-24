@@ -7,7 +7,7 @@
     <div class="auth-card">
       <div class="brand">
         <h1 class="logo">now<span>SOS</span></h1>
-        <p class="subtitle">Chào mừng bạn quay trở lại</p>
+        <p class="subtitle">Chào mừng bạn </p>
       </div>
 
       <form @submit.prevent="dangNhap" class="auth-form">
@@ -53,40 +53,51 @@
       </div>
 
       <p class="switch-page">
-        Chưa có tài khoản? <router-link to="/user/signup">Đăng ký ngay</router-link>
+        Chưa có tài khoản? <router-link to="/client/register">Đăng ký ngay</router-link>
       </p>
     </div>
   </div>
 </template>
 
 <script>
+import { authAPI } from "../../../services/api.js";
 
-import axios from 'axios';
 export default {
-    data() {
-        return {
-            thong_tin_dang_nhap: {}
+  data() {
+    return {
+      thong_tin_dang_nhap: {
+        email: "",
+        mat_khau: "",
+      },
+    };
+  },
+  methods: {
+    async dangNhap() {
+      try {
+        const res = await authAPI.loginUser({
+          email: this.thong_tin_dang_nhap.email,
+          mat_khau: this.thong_tin_dang_nhap.mat_khau,
+        });
+        const body = res.data;
+        if (body.status && body.token) {
+          localStorage.removeItem("admin_token");
+          localStorage.removeItem("admin_user");
+          localStorage.setItem("token", body.token);
+          localStorage.setItem("user", JSON.stringify(body.data || {}));
+          this.$toast.success(body.message || "Đăng nhập thành công");
+          this.$router.push("/");
+        } else {
+          this.$toast.error(body.message || "Đăng nhập thất bại");
         }
+      } catch (err) {
+        const msg =
+          err.response?.data?.message ||
+          "Không kết nối được máy chủ. Kiểm tra Laravel (php artisan serve) và CORS.";
+        this.$toast.error(msg);
+      }
     },
-    methods: {
-        dangNhap() {
-            axios.post('http://127.0.0.1:8000/api/nguoi-dung/login', this.thong_tin_dang_nhap)
-                .then((res) => {
-                    if (res.data.status) {
-                        this.$toast.success(res.data.message);
-                        console.log(res.data.data);
-
-                        localStorage.setItem('key_client', res.data.token)
-
-                        this.$router.push('/')
-                    } else {
-                        this.$toast.error(res.data.message);
-                    }
-                });
-        }
-    },
-}
-
+  },
+};
 </script>
 
 <style scoped>

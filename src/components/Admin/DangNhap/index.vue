@@ -20,10 +20,10 @@
 
       <form @submit.prevent="handleAdminLogin" class="auth-form">
         <div class="input-group">
-          <label for="admin-id">MÃ QUẢN TRỊ VIÊN</label>
+          <label for="admin-email">EMAIL QUẢN TRỊ</label>
           <div class="input-wrapper">
-            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            <input type="text" id="admin-id" placeholder="Nhập mã định danh Admin" required>
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <input v-model="form.email" type="email" id="admin-email" placeholder="Email admin" required autocomplete="username">
           </div>
         </div>
 
@@ -31,12 +31,12 @@
           <label for="password">MẬT KHẨU QUẢN TRỊ</label>
           <div class="input-wrapper">
             <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            <input type="password" id="password" placeholder="Nhập mật khẩu" required>
+            <input v-model="form.mat_khau" type="password" id="password" placeholder="Nhập mật khẩu" required autocomplete="current-password">
           </div>
         </div>
 
-        <button type="submit" class="btn-primary">
-          Truy cập Hệ thống Admin
+        <button type="submit" class="btn-primary" :disabled="loading">
+          {{ loading ? "Đang đăng nhập..." : "Truy cập Hệ thống Admin" }}
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
       </form>
@@ -48,9 +48,46 @@
   </div>
 </template>
 
-<script setup>
-const handleAdminLogin = () => {
-  // Admin Login logic here
+<script>
+import { authAPI } from "../../../services/api.js";
+
+export default {
+  name: "AdminDangNhap",
+  data() {
+    return {
+      form: { email: "", mat_khau: "" },
+      loading: false,
+    };
+  },
+  methods: {
+    async handleAdminLogin() {
+      this.loading = true;
+      try {
+        const res = await authAPI.loginAdmin({
+          email: this.form.email,
+          mat_khau: this.form.mat_khau,
+        });
+        const body = res.data;
+        if (body.status && body.token) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          localStorage.setItem("admin_token", body.token);
+          localStorage.setItem("admin_user", JSON.stringify(body.data || {}));
+          this.$toast.success(body.message || "Đăng nhập thành công");
+          this.$router.push("/admin");
+        } else {
+          this.$toast.error(body.message || "Đăng nhập thất bại");
+        }
+      } catch (err) {
+        this.$toast.error(
+          err.response?.data?.message ||
+            "Không kết nối được API. Chạy Laravel và kiểm tra CORS."
+        );
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
 };
 </script>
 

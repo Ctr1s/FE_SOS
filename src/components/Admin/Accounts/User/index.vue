@@ -1,4 +1,3 @@
-
 <template>
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
@@ -130,7 +129,10 @@
         </div>
     </div>
 </template>
+
 <script>
+import { userAPI } from "../../../../services/api";
+
 export default {
     data() {
         return {
@@ -144,27 +146,75 @@ export default {
             }
         };
     },
+    mounted() {
+        this.fetchUsers();
+    },
     methods: {
-        toggleStatus(item) {
-            item.trang_thai = item.trang_thai == 1 ? 0 : 1;
+        async fetchUsers() {
+            try {
+                const response = await userAPI.getList();
+                this.users = response.data.data;
+            } catch (error) {
+                console.error("Lỗi khi tải danh sách user", error);
+            }
         },
 
-        addUser() {
-            this.users.push({ ...this.form, trang_thai: 1 });
-            this.form = {};
+        async toggleStatus(item) {
+            try {
+                await userAPI.changeStatus(item.id_nguoi_dung);
+                item.trang_thai = item.trang_thai == 1 ? 0 : 1;
+                this.$toast.success("Đổi trạng thái thành công!");
+            } catch (error) {
+                console.error("Lỗi khi thay đổi trạng thái", error);
+                this.$toast.error("Lỗi thay đổi trạng thái!");
+            }
         },
 
-        updateUser() {
-            let index = this.users.findIndex(u => u.id_nguoi_dung == this.selected.id_nguoi_dung);
-            this.users[index] = this.selected;
+        async addUser() {
+            try {
+                const res = await userAPI.create(this.form);
+                if (res.data.status) {
+                    this.fetchUsers();
+                    this.form = {};
+                    this.$toast.success("Thêm User thành công!");
+                } else {
+                    this.$toast.error(res.data.message || "Lỗi khi thêm");
+                }
+            } catch (error) {
+                console.error("Lỗi khi thêm user", error);
+                this.$toast.error(error.response?.data?.message || "Lỗi hệ thống");
+            }
         },
 
-        deleteUser() {
-            this.users = this.users.filter(u => u.id_nguoi_dung != this.selected.id_nguoi_dung);
+        async updateUser() {
+            try {
+                const res = await userAPI.update(this.selected.id_nguoi_dung, this.selected);
+                if (res.data.status) {
+                    this.fetchUsers();
+                    this.$toast.success("Cập nhật thành công!");
+                } else {
+                    this.$toast.error(res.data.message || "Lỗi cập nhật");
+                }
+            } catch (error) {
+                console.error("Lỗi khi cập nhật user", error);
+                this.$toast.error(error.response?.data?.message || "Lỗi hệ thống");
+            }
+        },
+
+        async deleteUser() {
+            try {
+                const res = await userAPI.delete(this.selected.id_nguoi_dung);
+                if (res.data.status) {
+                    this.users = this.users.filter(u => u.id_nguoi_dung != this.selected.id_nguoi_dung);
+                    this.$toast.success("Đã xóa User!");
+                } else {
+                    this.$toast.error(res.data.message || "Lỗi khi xóa");
+                }
+            } catch (error) {
+                console.error("Lỗi khi xóa user", error);
+                this.$toast.error(error.response?.data?.message || "Lỗi hệ thống");
+            }
         }
     }
 };
 </script>
-<style >
-  
-</style>

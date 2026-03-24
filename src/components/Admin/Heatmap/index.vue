@@ -7,7 +7,9 @@
       </div>
     </div>
     <div class="card-body">
-      <div class="heatmap-placeholder rounded-4 mb-3"></div>
+      <div class="heatmap-map rounded-4 mb-3 overflow-hidden border">
+        <MapboxMap :zoom="11" />
+      </div>
       <div class="small text-muted">
         Bạn có thể tích hợp:
         <ul>
@@ -20,18 +22,17 @@
 </template>
 
 <script>
+import MapboxMap from "../../common/MapboxMap.vue";
+
 export default {
   name: "AdminHeatmap",
+  components: { MapboxMap },
 };
 </script>
 
 <style scoped>
-.heatmap-placeholder {
-  height: 320px;
-  background: radial-gradient(circle at 20% 30%, rgba(248, 113, 113, 0.35), transparent 60%),
-    radial-gradient(circle at 70% 40%, rgba(251, 146, 60, 0.32), transparent 55%),
-    radial-gradient(circle at 45% 70%, rgba(250, 204, 21, 0.35), transparent 60%),
-    #020617;
+.heatmap-map {
+  height: 380px;
 }
 </style>
 

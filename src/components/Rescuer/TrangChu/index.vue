@@ -26,7 +26,7 @@
 
       <div class="col-lg-8 col-xl-9 position-relative bg-secondary bg-opacity-10 p-0">
         <div class="w-100 h-100 bg-white">
-          <img src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/105.8342,21.0285,14/1200x800?access_token=YOUR_TOKEN" class="w-100 h-100 object-fit-cover opacity-75" alt="Map">
+          <img :src="`https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/105.8342,21.0285,14/1200x800?access_token=${mapboxToken}`" class="w-100 h-100 object-fit-cover opacity-75" alt="Map">
         </div>
 
         <div class="position-absolute top-0 end-0 m-3 col-11 col-md-5 col-lg-4">
@@ -95,6 +95,7 @@
 export default {
   data() {
     return {
+      mapboxToken: import.meta.env.VITE_MAPBOX_TOKEN,
       missions: [
         { id: 1, type: 'Tai nạn giao thông', priorityText: 'CAO', priorityBg: 'bg-danger bg-opacity-10 text-danger', distance: '2.5km', time: '2 phút trước' },
         { id: 2, type: 'Hỏa hoạn nhà dân', priorityText: 'CAO', priorityBg: 'bg-danger bg-opacity-10 text-danger', distance: '4.1km', time: '5 phút trước' },

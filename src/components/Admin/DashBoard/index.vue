@@ -78,7 +78,9 @@
             <small class="text-muted">Demo UI (sẽ gắn map sau)</small>
           </div>
           <div class="card-body">
-            <div class="heatmap-placeholder rounded-4 mb-3"></div>
+            <div class="heatmap-map rounded-4 mb-3 overflow-hidden border">
+              <MapboxMap :zoom="11" />
+            </div>
             <ul class="list-unstyled small mb-0">
               <li v-for="zone in dangerZones" :key="zone.name" class="d-flex justify-content-between mb-1">
                 <span>
@@ -174,8 +176,11 @@
 </template>
 
 <script>
+import MapboxMap from "../../common/MapboxMap.vue";
+
 export default {
   name: "AdminDashboard",
+  components: { MapboxMap },
   data() {
     return {
       summaryCards: [
@@ -293,12 +298,8 @@ export default {
   justify-content: center;
 }
 
-.heatmap-placeholder {
-  height: 180px;
-  background: radial-gradient(circle at 20% 30%, rgba(248, 113, 113, 0.35), transparent 60%),
-    radial-gradient(circle at 70% 40%, rgba(251, 146, 60, 0.32), transparent 55%),
-    radial-gradient(circle at 45% 70%, rgba(250, 204, 21, 0.35), transparent 60%),
-    #020617;
+.heatmap-map {
+  height: 250px;
 }
 
 .legend-dot {
