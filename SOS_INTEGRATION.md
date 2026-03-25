@@ -16,11 +16,11 @@ Tạo file `.env` trong thư mục `FE` (copy từ `.env.example`):
 
 ```
 VITE_API_BASE_URL=http://localhost:8000/api
-VITE_MAPBOX_ACCESS_TOKEN=pk.xxxxx
+VITE_OPENMAP_API_KEY=your_api_key_here
 ```
 
-- **Mapbox**: tạo token tại [mapbox.com/account](https://account.mapbox.com/access-tokens/) (miễn phí).
-- Không có token Mapbox: bản đồ hiện hướng dẫn cấu hình, các chức năng khác vẫn chạy.
+- **OpenMap**: tạo API Key tại [enterprise.openmap.vn](https://enterprise.openmap.vn/) (miễn phí).
+- Không có API Key OpenMap: bản đồ hiện hướng dẫn cấu hình, các chức năng khác vẫn chạy.
 
 ## 3. Đăng nhập / đăng ký
 

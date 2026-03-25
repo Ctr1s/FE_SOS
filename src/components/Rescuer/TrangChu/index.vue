@@ -95,7 +95,7 @@
 export default {
   data() {
     return {
-      mapboxToken: import.meta.env.VITE_MAPBOX_TOKEN,
+      openmapApiKey: import.meta.env.VITE_OPENMAP_API_KEY,
       missions: [
         { id: 1, type: 'Tai nạn giao thông', priorityText: 'CAO', priorityBg: 'bg-danger bg-opacity-10 text-danger', distance: '2.5km', time: '2 phút trước' },
         { id: 2, type: 'Hỏa hoạn nhà dân', priorityText: 'CAO', priorityBg: 'bg-danger bg-opacity-10 text-danger', distance: '4.1km', time: '5 phút trước' },

@@ -1,4 +1,3 @@
-
 <template>
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
@@ -33,8 +32,7 @@
 
                         <!-- TRẠNG THÁI -->
                         <td>
-                            <button class="btn w-100"
-                                :class="item.trang_thai == 1 ? 'btn-success' : 'btn-danger'"
+                            <button class="btn w-100" :class="item.trang_thai == 1 ? 'btn-success' : 'btn-danger'"
                                 @click="toggleStatus(item)">
                                 {{ item.trang_thai == 1 ? 'Hoạt động' : 'Bị khóa' }}
                             </button>
@@ -42,16 +40,12 @@
 
                         <!-- ACTION -->
                         <td class="text-center">
-                            <button class="btn btn-warning btn-sm me-1"
-                                data-bs-toggle="modal"
-                                data-bs-target="#modalEdit"
-                                @click="selected = { ...item }">
+                            <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal"
+                                data-bs-target="#modalEdit" @click="selected = { ...item }">
                                 <i class="fa fa-pen"></i>
                             </button>
 
-                            <button class="btn btn-danger btn-sm"
-                                data-bs-toggle="modal"
-                                data-bs-target="#modalDelete"
+                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete"
                                 @click="selected = item">
                                 <i class="fa fa-trash"></i>
                             </button>
@@ -165,6 +159,4 @@ export default {
     }
 };
 </script>
-<style >
-  
-</style>
+<style></style>

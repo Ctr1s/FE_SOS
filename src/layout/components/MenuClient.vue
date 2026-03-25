@@ -45,7 +45,7 @@
                     <template v-if="!isLoggedIn">
                         <div class="d-none d-md-flex align-items-center me-3 border-end border-light border-opacity-25 pe-3">
                             <span class="badge rounded-pill bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2 me-3" style="font-size: 0.7rem;">
-                                <i class="fa-solid fa-circle me-2 now-dot"></i> HỆ THỐNG: ĐANG HOẠT ĐỘNG
+                                <i class="fa-solid fa-circle me-2 now-dot"></i> <p class="text">HỆ THỐNG: ĐANG HOẠT ĐỘNG</p>
                             </span>
                         </div>
                         <div class="d-flex">

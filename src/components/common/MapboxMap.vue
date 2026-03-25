@@ -3,9 +3,9 @@
     <div v-if="!hasToken" class="mapbox-fallback d-flex align-items-center justify-content-center bg-dark text-white-50 small p-4 text-center">
       <div>
         <i class="fa-solid fa-map-location-dot fs-2 mb-2 d-block text-warning"></i>
-        Chưa cấu hình <code class="text-warning">VITE_MAPBOX_ACCESS_TOKEN</code> trong file <code>.env</code>
-        (FE). Tạo token tại
-        <a href="https://account.mapbox.com/" target="_blank" rel="noopener" class="text-info">mapbox.com</a>.
+        Chưa cấu hình <code class="text-warning">VITE_OPENMAP_API_KEY</code> trong file <code>.env</code>
+        (FE). Tạo API Key tại
+        <a href="https://enterprise.openmap.vn/" target="_blank" rel="noopener" class="text-info">enterprise.openmap.vn</a>.
       </div>
     </div>
     <div v-show="hasToken" ref="containerEl" class="mapbox-canvas w-100 h-100 rounded-4"></div>
@@ -14,8 +14,8 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref, watch } from "vue";
-import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
+import maplibregl from "@openmapvn/openmapvn-gl";
+import "@openmapvn/openmapvn-gl/dist/maplibre-gl.css";
 
 const props = defineProps({
   center: {
@@ -31,34 +31,34 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  /** Style Mapbox (streets, satellite, ...) */
+  /** Style OpenMap (day-v1, night-v1, satellite, ...) */
   mapStyle: {
     type: String,
-    default: "mapbox://styles/mapbox/streets-v12",
+    default: "day-v1",
   },
 });
 
 const containerEl = ref(null);
-const hasToken = ref(!!import.meta.env.VITE_MAPBOX_ACCESS_TOKEN);
+const hasToken = ref(!!import.meta.env.VITE_OPENMAP_API_KEY);
 
 let map = null;
 let marker = null;
 
 function initMap() {
-  const token = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
-  if (!token || !containerEl.value) return;
+  const apiKey = import.meta.env.VITE_OPENMAP_API_KEY;
+  if (!apiKey || !containerEl.value) return;
 
-  mapboxgl.accessToken = token;
-  map = new mapboxgl.Map({
+  const styleUrl = `https://maptiles.openmap.vn/styles/${props.mapStyle}/style.json?apikey=${apiKey}`;
+  map = new maplibregl.Map({
     container: containerEl.value,
-    style: props.mapStyle,
+    style: styleUrl,
     center: props.center,
     zoom: props.zoom,
   });
-  map.addControl(new mapboxgl.NavigationControl(), "top-right");
+  map.addControl(new maplibregl.NavigationControl(), "top-right");
 
   if (props.showMarker) {
-    marker = new mapboxgl.Marker({ color: "#dc3545" })
+    marker = new maplibregl.Marker({ color: "#dc3545" })
       .setLngLat(props.center)
       .addTo(map);
   }
