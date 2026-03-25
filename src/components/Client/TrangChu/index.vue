@@ -148,7 +148,7 @@ export default {
             }
         },
         goToLogin() {
-            // Remove lingering modal backdrop if any (Bootstrap native workaround for routing)
+            
             document.body.classList.remove('modal-open');
             const backups = document.querySelectorAll('.modal-backdrop');
             backups.forEach(b => b.remove());

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import checkAdmin from "./checkAdmin";
 
 const routes = [
     // client
@@ -55,6 +56,7 @@ const routes = [
         path: "/admin",
         component: () => import("../components/Admin/DashBoard/index.vue"),
         meta: { layout: "admin" },
+        beforeEnter: checkAdmin,
     },
     {
         path: "/admin/queue",

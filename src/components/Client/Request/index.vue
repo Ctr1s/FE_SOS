@@ -52,17 +52,7 @@ export default {
   data() {
     return {
       danhsach: [
-        {
-          id: '12345',
-          loai: 'Ngập lụt',
-          time: '14:30 - 25/12/2023',
-          address: '123 Lê Lợi, Quận 1, TP.HCM',
-          statusText: 'Hoàn thành',
-          statusBg: 'bg-success bg-opacity-10 text-success',
-          icon: 'bi-water',
-          iconColor: 'text-primary',
-          iconBg: 'bg-primary bg-opacity-10'
-        },
+        
         {
           id: '12346',
           loai: 'Y tế',
@@ -85,17 +75,7 @@ export default {
           iconColor: 'text-danger',
           iconBg: 'bg-danger bg-opacity-10'
         },
-        {
-          id: '12348',
-          loai: 'Lương thực',
-          time: '08:00 - 20/12/2023',
-          address: 'Cao tốc Long Thành - Dầu Giây',
-          statusText: 'Hoàn thành',
-          statusBg: 'bg-success bg-opacity-10 text-success',
-          icon: 'bi-box-seam-fill',
-          iconColor: 'text-success',
-          iconBg: 'bg-success bg-opacity-10'
-        }
+        
       ]
     }
   }

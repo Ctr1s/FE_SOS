@@ -80,9 +80,9 @@ export default {
         });
         const body = res.data;
         if (body.status && body.token) {
-          localStorage.removeItem("admin_token");
-          localStorage.removeItem("admin_user");
-          localStorage.setItem("token", body.token);
+          localStorage.removeItem("user_token");
+          localStorage.removeItem("user");
+          localStorage.setItem("user_token", body.token);
           localStorage.setItem("user", JSON.stringify(body.data || {}));
           this.$toast.success(body.message || "Đăng nhập thành công");
           this.$router.push("/");
