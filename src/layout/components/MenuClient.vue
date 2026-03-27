@@ -77,16 +77,16 @@
                                         <i class="fa-solid fa-key me-2"></i>Đổi mật khẩu
                                     </router-link>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <router-link class="dropdown-item" to="/client/profile" @click="closeDropdown">
                                         <i class="fa-solid fa-pen-to-square me-2"></i>Cập nhật thông tin
                                     </router-link>
-                                </li>
-                                <li>
+                                </li> -->
+                                <!-- <li>
                                     <router-link class="dropdown-item" to="/client/history" @click="closeDropdown">
                                         <i class="fa-solid fa-clock-rotate-left me-2"></i>Lịch sử yêu cầu
                                     </router-link>
-                                </li>
+                                </li> -->
                                 <li>
                                     <hr class="dropdown-divider my-1" />
                                 </li>

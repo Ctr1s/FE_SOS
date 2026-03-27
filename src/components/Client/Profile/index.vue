@@ -58,9 +58,9 @@
                   data-bs-toggle="modal" data-bs-target="#editPro5">
                   <i class="fas fa-user-edit me-2 small"></i>Chỉnh sửa hồ sơ
                 </button>
-                <button class="btn btn-outline-primary btn-md fw-semibold border-2 hover-lift rounded-3" type="button">
+                <!-- <button class="btn btn-outline-primary btn-md fw-semibold border-2 hover-lift rounded-3" type="button">
                   <i class="fas fa-key me-2 small"></i>Đổi mật khẩu
-                </button>
+                </button> -->
               </div>
             </div>
           </div>
@@ -77,15 +77,20 @@
   </div>
 
   <!-- editPro5 -->
-  <div class="modal fade" id="editPro5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade " id="editPro5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content mt-5">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Cập Nhật Thông Tin</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+          <label>Họ và tên</label>
+          <input type="text" class="form-control mt-3" >
+          <label class="mt-2">Số điện thoại</label>
+          <input type="text" class="form-control mt-3" >
+          <label class="mt-2">Địa chỉ Email</label>
+          <input type="text" class="form-control mt-3" >
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
