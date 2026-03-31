@@ -1,7 +1,9 @@
 <template>
-    <div class="wrapper">
+    <div class="wrapper client-shell">
         <MenuClient></MenuClient>
+        <main class="client-content">
             <router-view></router-view>
+        </main>
         <BotClient></BotClient>
     </div>
 </template>
@@ -37,4 +39,15 @@ export default {
 @import "../../assets/css/dark-theme.css";
 @import "../../assets/css/semi-dark.css";
 @import "../../assets/css/header-colors.css";
+
+.client-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.client-content {
+    flex: 1 1 auto;
+    min-height: 0;
+}
 </style>

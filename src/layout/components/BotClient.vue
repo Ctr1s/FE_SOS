@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-white border-top py-3 px-4 mt-5">
+  <footer class="bot-client-footer bg-white border-top py-3 px-4">
     <div class="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center">
       <div class="small text-muted mb-2 mb-md-0">
         &copy; 2026 <strong>nowSOS</strong>. Hệ thống hỗ trợ khẩn cấp.
@@ -18,3 +18,11 @@ export default {
   name: 'TheFooter'
 }
 </script>
+
+<style scoped>
+.bot-client-footer {
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+}
+</style>

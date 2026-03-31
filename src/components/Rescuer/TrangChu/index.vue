@@ -25,8 +25,12 @@
       </div>
 
       <div class="col-lg-8 col-xl-9 position-relative bg-secondary bg-opacity-10 p-0">
-        <div class="w-100 h-100 bg-white">
-          <img :src="`https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/105.8342,21.0285,14/1200x800?access_token=${mapboxToken}`" class="w-100 h-100 object-fit-cover opacity-75" alt="Map">
+        <div class="w-100 h-100 bg-white position-relative">
+          <MapboxMap
+            class="w-100 h-100"
+            :center="[105.8342, 21.0285]"
+            :zoom="14"
+          />
         </div>
 
         <div class="position-absolute top-0 end-0 m-3 col-11 col-md-5 col-lg-4">
@@ -92,10 +96,12 @@
 </template>
 
 <script>
+import MapboxMap from "../../common/MapboxMap.vue";
+
 export default {
+  components: { MapboxMap },
   data() {
     return {
-      openmapApiKey: import.meta.env.VITE_OPENMAP_API_KEY,
       missions: [
         { id: 1, type: 'Tai nạn giao thông', priorityText: 'CAO', priorityBg: 'bg-danger bg-opacity-10 text-danger', distance: '2.5km', time: '2 phút trước' },
         { id: 2, type: 'Hỏa hoạn nhà dân', priorityText: 'CAO', priorityBg: 'bg-danger bg-opacity-10 text-danger', distance: '4.1km', time: '5 phút trước' },
