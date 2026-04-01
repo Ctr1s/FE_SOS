@@ -77,8 +77,11 @@
                     class="w-100 border border-2 border-secondary border-opacity-25 border-dashed rounded-3 p-4 text-center bg-light text-muted btn btn-light border-0 shadow-sm">
                     <i class="fa-solid fa-cloud-arrow-up fs-2"></i>
                     <p class="small mt-2 mb-0 fw-bold">Tai len anh/video</p>
-                    <input type="file" class="d-none" accept="image/*,video/*">
+                    <input type="file" class="d-none" accept="image/*,video/*" @change="handleFileSelect">
                 </label>
+                <div v-if="selectedImageName" class="small text-muted mt-2">
+                    <span class="fw-semibold">File đã chọn:</span> {{ selectedImageName }}
+                </div>
             </div>
 
             <button type="button" class="btn btn-danger w-100 py-3 fw-bold fs-5 shadow-lg rounded-3 border-0"
@@ -230,6 +233,12 @@ export default {
             locating: false,
             submitting: false,
             selectedCoords: null,
+            selectedImageName: "",
+            selectedImageData: null,
+            soNguoiBiAnhHuong: 1,
+            mucDoKhanCap: "HIGH",
+            diemUuTien: null,
+            trangThai: null,
             units: [
                 { name: "Canh sat", d: "1.2 km - 5p", i: "fa-shield-halved", c: "bg-primary", t: "text-primary" },
                 { name: "BV Da khoa", d: "0.8 km - 3p", i: "fa-hospital", c: "bg-danger", t: "text-danger" }
@@ -341,8 +350,20 @@ export default {
             } finally {
                 this.locating = false;
             }
-        },
-        layIdNguoiDungHienTai() {
+        },        handleFileSelect(event) {
+            const file = event.target.files?.[0];
+            if (!file) {
+                this.selectedImageName = "";
+                this.selectedImageData = null;
+                return;
+            }
+            this.selectedImageName = file.name;
+            const reader = new FileReader();
+            reader.onload = () => {
+                this.selectedImageData = String(reader.result);
+            };
+            reader.readAsDataURL(file);
+        },        layIdNguoiDungHienTai() {
             const sources = ["user", "client"];
             for (const key of sources) {
                 const raw = localStorage.getItem(key);
@@ -403,8 +424,11 @@ export default {
                     vi_tri_dia_chi: this.address.trim(),
                     chi_tiet: this.layTenChiTietDangChon(),
                     mo_ta: this.description.trim(),
-                    muc_do_khan_cap: "HIGH",
-                    so_nguoi_bi_anh_huong: 1,
+                    hinh_anh: this.selectedImageData || null,
+                    so_nguoi_bi_anh_huong: Number(this.soNguoiBiAnhHuong) || 1,
+                    muc_do_khan_cap: this.mucDoKhanCap || "HIGH",
+                    diem_uu_tien: this.diemUuTien !== null ? Number(this.diemUuTien) : null,
+                    trang_thai: this.trangThai,
                 };
 
                 const response = await rescueRequestAPI.create(payload);
@@ -418,6 +442,12 @@ export default {
                 this.address = "";
                 this.coordsText = "";
                 this.selectedCoords = null;
+                this.selectedImageName = "";
+                this.selectedImageData = null;
+                this.soNguoiBiAnhHuong = 1;
+                this.mucDoKhanCap = "HIGH";
+                this.diemUuTien = null;
+                this.trangThai = null;
                 this.selectedType = this.incidentTypes[0]?.id ?? null;
                 await this.taiChiTietLoaiSuCo(this.selectedType);
                 this.$router.push("/client/requests");

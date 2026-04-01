@@ -71,10 +71,11 @@ export const incidentTypeAPI = {
 // Rescue Requests (Yêu cầu Cứu hộ)
 export const rescueRequestAPI = {
   getList: () => api.get('/yeu-cau-cuu-ho'),
+  getByUser: (userId) => api.get('/yeu-cau-cuu-ho', { params: { id_nguoi_dung: userId } }),
   getDetail: (id) => api.get(`/yeu-cau-cuu-ho/${id}`),
   create: (data) => api.post('/yeu-cau-cuu-ho', data),
   update: (id, data) => api.put(`/yeu-cau-cuu-ho/${id}`, data),
-  changeStatus: (id) => api.put(`/yeu-cau-cuu-ho/cap-nhat-trang-thai/${id}`),
+  changeStatus: (id, data) => api.put(`/yeu-cau-cuu-ho/${id}/trang-thai`, data),
   getByStatus: (status) => api.get('/yeu-cau-cuu-ho/theo-trang-thai', { params: { trang_thai: status } }),
   getByPriority: (priority) => api.get('/yeu-cau-cuu-ho/theo-muc-do-khan-cap', { params: { muc_do_khan_cap: priority } }),
   getAIClassification: () => api.get('/yeu-cau-cuu-ho/phan-loai-ai'),

@@ -137,4 +137,11 @@ const router = createRouter({
     routes: routes,
 });
 
+router.beforeEach((to, from, next) => {
+    if (to.path.startsWith("/admin") && to.path !== "/admin/login") {
+        return checkAdmin(to, from, next);
+    }
+    next();
+});
+
 export default router;
